@@ -16,6 +16,7 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import jarsick.muser.generator.InstrumentName;
 import jarsick.muser.generator.InstrumentNames;
+import jarsick.muser.generator.SongGeneratorSettings;
 import jarsick.muser.generator.random.Random;
 import jarsick.muser.notation.Note;
 import jarsick.muser.notation.Scale;
@@ -190,8 +191,8 @@ public class MuserGUI {
 		sliderTempo.setPaintTicks(true);
 		sliderTempo.setBackground(SystemColor.controlDkShadow);
 		sliderTempo.setValue(160);
-		sliderTempo.setMaximum(250);
-		sliderTempo.setMinimum(90);
+		sliderTempo.setMaximum(SongGeneratorSettings.MAX_TEMPO);
+		sliderTempo.setMinimum(SongGeneratorSettings.MIN_TEMPO);
 		frmMuser.getContentPane().add(sliderTempo, "4, 4, left, default");
 
 		var lblTimeSignature = new JLabel("Time Signature");
@@ -419,7 +420,11 @@ public class MuserGUI {
 		btnRandom.setIcon(new ImageIcon(MuserGUI.class.getClassLoader().getResource("dice_icon.png")));
 		menuBar.add(btnRandom);
 		btnRandom.addActionListener(evt -> {
-			randomSlider(sliderTempo, 120, 200);
+			randomSlider(
+					sliderTempo,
+					SongGeneratorSettings.MIN_TEMPO,
+					SongGeneratorSettings.MAX_TEMPO
+					);
 
 			randomCheckBox(chckbxSingableMelody);
 

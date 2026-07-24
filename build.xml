@@ -1,22 +1,64 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="create_run_jar" name="Create Runnable Jar for Project Muser">
-    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
-    <!--ANT 1.7 is required                                        -->
-    <!--define folder properties-->
-    <property name="dir.buildfile" value="."/>
-    <property name="dir.workspace" value="${dir.buildfile}/.."/>
-    <property name="dir.jarfile" value="${dir.workspace}/Muser Release/Muser JVM/"/>
-    <target name="create_run_jar">
-        <jar destfile="${dir.jarfile}/muser.jar" filesetmanifest="mergewithoutmain">
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Muser" default="release" basedir=".">
+    <description>Compile Muser and create a self-contained runnable JAR.</description>
+
+    <property name="src.dir" value="${basedir}/src"/>
+    <property name="icons.dir" value="${basedir}/icons"/>
+    <property name="build.dir" value="${basedir}/build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="release.dir" value="${basedir}/release"/>
+    <property name="release.jar" value="${release.dir}/muser.jar"/>
+
+    <path id="compile.classpath">
+        <fileset dir="${basedir}">
+            <include name="jgoodies-forms-1.8.0.jar"/>
+            <include name="miglayout15-swing.jar"/>
+            <include name="jgoodies-common-1.8.0.jar"/>
+            <include name="jfugue-5.0.9.jar"/>
+        </fileset>
+    </path>
+
+    <target name="clean" description="Remove generated build and release files">
+        <delete dir="${build.dir}"/>
+        <delete dir="${release.dir}"/>
+    </target>
+
+    <target name="compile" description="Compile the Java sources">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}"
+               destdir="${classes.dir}"
+               release="17"
+               encoding="UTF-8"
+               debug="true"
+               includeantruntime="false">
+            <classpath refid="compile.classpath"/>
+        </javac>
+        <copy todir="${classes.dir}">
+            <fileset dir="${icons.dir}"/>
+        </copy>
+    </target>
+
+    <target name="release" depends="compile"
+            description="Create a self-contained runnable JAR in release/">
+        <mkdir dir="${release.dir}"/>
+        <jar destfile="${release.jar}" filesetmanifest="mergewithoutmain">
             <manifest>
                 <attribute name="Main-Class" value="jarsick.muser.gui.MuserGUI"/>
                 <attribute name="Class-Path" value="."/>
             </manifest>
-            <fileset dir="${dir.buildfile}/bin"/>
-            <zipfileset excludes="META-INF/*.SF" src="${dir.buildfile}/jgoodies-forms-1.8.0.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="${dir.buildfile}/miglayout15-swing.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="${dir.buildfile}/jgoodies-common-1.8.0.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="${dir.buildfile}/jfugue-5.0.9.jar"/>
+            <fileset dir="${classes.dir}"/>
+            <zipfileset src="${basedir}/jgoodies-forms-1.8.0.jar"
+                        excludes="META-INF/*.SF,META-INF/*.RSA,META-INF/*.DSA"/>
+            <zipfileset src="${basedir}/miglayout15-swing.jar"
+                        excludes="META-INF/*.SF,META-INF/*.RSA,META-INF/*.DSA"/>
+            <zipfileset src="${basedir}/jgoodies-common-1.8.0.jar"
+                        excludes="META-INF/*.SF,META-INF/*.RSA,META-INF/*.DSA"/>
+            <zipfileset src="${basedir}/jfugue-5.0.9.jar"
+                        excludes="META-INF/*.SF,META-INF/*.RSA,META-INF/*.DSA"/>
         </jar>
+        <echo message="Release created: ${release.jar}"/>
     </target>
+
+    <!-- Backward-compatible target name used by the previous Eclipse-generated file. -->
+    <target name="create_run_jar" depends="release"/>
 </project>

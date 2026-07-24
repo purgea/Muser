@@ -12,8 +12,13 @@ If want to use a song from muser you can credit **Jarsick** as well as **Muser**
 - The Java version needs the user have Java 17(or higher) installed.
 
 ## Building
-- Import the project on Eclipse (This can also easily adapted for IntelliJ)
-- Run the ant file "build.xml"
+- Install a Java 17 (or newer) JDK.
+- From PowerShell, run `.\build.ps1`.
+- The runnable application will be created at `release\muser.jar`.
+- Run it with `java -jar release\muser.jar`, or build and run it in one step with
+  `.\build.ps1 run`.
+
+Apache Ant is optional. If installed, `ant` produces the same release path.
 
 ## Reporting Issues
 When you report an issue, please indicate:

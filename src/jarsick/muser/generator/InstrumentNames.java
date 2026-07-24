@@ -39,7 +39,9 @@ public interface InstrumentNames {
 	};
 	
 	InstrumentName[] CHORDS = {
-			new InstrumentName("Choir", 53),
+			new InstrumentName("Choir Aahs", 53),
+			new InstrumentName("Voice Oohs", 54),
+			new InstrumentName("Synth Voice", 55),
 			new InstrumentName("Brass", 62),
 			new InstrumentName("Strings", 49),
 			new InstrumentName("Pad", 89),

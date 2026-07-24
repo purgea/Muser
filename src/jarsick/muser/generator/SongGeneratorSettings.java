@@ -19,9 +19,9 @@ public class SongGeneratorSettings {
 
 	public static int DEFAULT_MIN_OCTAVE = 5;
 	public static int DEFAULT_MAX_OCTAVE = 6;
+	public static final int MIN_TEMPO = 50;
+	public static final int MAX_TEMPO = 250;
 
-	private static int MAX_TEMPO = 250;
-	private static int MIN_TEMPO = 90;
 	private static int DEFAULT_SUBSECTION_MEASURES = 4;
 
 	 private boolean singableMelody;
