@@ -3,4 +3,4 @@ Version 1.0.0_alpha:
 
 Unreleased:
 -Allow tempos from 50 to 250 BPM in the GUI and randomizer
--Add Voice Oohs and Synth Voice chord instruments
+-Add a layered Dark Choir (Choir Aahs + Synth Voice) and Synth Voice chord instruments

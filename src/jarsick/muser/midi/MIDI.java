@@ -18,6 +18,7 @@ import javax.sound.midi.Sequence;
 import org.jfugue.pattern.PatternProducer;
 import org.jfugue.player.Player;
 
+import jarsick.muser.generator.InstrumentNames;
 import jarsick.muser.generator.SongGenerator;
 import jarsick.muser.generator.SongGeneratorSettings;
 import jarsick.muser.jfigure.PatternFactory;
@@ -35,7 +36,27 @@ public class MIDI {
 
 		var melodyPattern = PatternFactory.fromNotes(song.getMelody(), tempo, settings.getMelodyInstrument());
 		var bassPattern = PatternFactory.fromNotes(song.getBass(), tempo, settings.getBassInstrument());
-		var chordsPattern = PatternFactory.fromChords(song.getChords(), tempo, settings.getChordsInstrument());
+		var chordsPatterns = new ArrayList<PatternProducer>();
+		if(settings.getChordsInstrument() == InstrumentNames.DARK_CHOIR_SELECTOR - 1) {
+			// The stock General MIDI Voice Oohs patch is often thin. Build the
+			// dark choir from a recognizable choir layer plus a synthetic layer.
+			chordsPatterns.add(PatternFactory.fromChords(
+					song.getChords(),
+					tempo,
+					InstrumentNames.CHOIR_AAHS_PROGRAM - 1
+					));
+			chordsPatterns.add(PatternFactory.fromChords(
+					song.getChords(),
+					tempo,
+					InstrumentNames.SYNTH_VOICE_PROGRAM - 1
+					));
+		} else {
+			chordsPatterns.add(PatternFactory.fromChords(
+					song.getChords(),
+					tempo,
+					settings.getChordsInstrument()
+					));
+		}
 
 		var drumPattern = PatternFactory.fromDrums(
 				9,
@@ -71,7 +92,7 @@ public class MIDI {
 		}
 
 		if(settings.getDensity().getChords() > 0) {
-			patterns.add(chordsPattern);
+			patterns.addAll(chordsPatterns);
 		}
 
 		PatternFactory.resetVoiceIndex();

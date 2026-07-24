@@ -8,6 +8,12 @@
 package jarsick.muser.generator;
 
 public interface InstrumentNames {
+
+	// General MIDI program numbers are one-based here; InstrumentName converts
+	// them to the zero-based values used by JFugue.
+	int CHOIR_AAHS_PROGRAM = 53;
+	int DARK_CHOIR_SELECTOR = 54;
+	int SYNTH_VOICE_PROGRAM = 55;
 	
 	InstrumentName[] MELODY = {
 			new InstrumentName("Piano", 1),
@@ -39,9 +45,9 @@ public interface InstrumentNames {
 	};
 	
 	InstrumentName[] CHORDS = {
-			new InstrumentName("Choir Aahs", 53),
-			new InstrumentName("Voice Oohs", 54),
-			new InstrumentName("Synth Voice", 55),
+			new InstrumentName("Choir Aahs", CHOIR_AAHS_PROGRAM),
+			new InstrumentName("Dark Choir (Layered)", DARK_CHOIR_SELECTOR),
+			new InstrumentName("Synth Voice", SYNTH_VOICE_PROGRAM),
 			new InstrumentName("Brass", 62),
 			new InstrumentName("Strings", 49),
 			new InstrumentName("Pad", 89),
