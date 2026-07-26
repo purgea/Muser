@@ -36,6 +36,8 @@ import java.awt.Toolkit;
 import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -459,15 +461,25 @@ public class MuserGUI {
 		btnStop.setIcon(new ImageIcon(MuserGUI.class.getClassLoader().getResource("stop_icon.png")));
 		menuBar.add(btnStop);
 
-		var btnSave = new JButton("Save MIDI");
-		btnSave.setToolTipText("Export the last generated song into a MIDI file");
-		btnSave.setBackground(Color.BLACK);
-		btnSave.setForeground(new Color(255, 255, 255));
-		btnSave.setIcon(new ImageIcon(MuserGUI.class.getClassLoader().getResource("save_icon.png")));
-		menuBar.add(btnSave);
-		btnSave.addActionListener(evt -> {
-			controller.saveMIDI();
-		});
+		var menuSave = new JMenu("Save");
+		menuSave.setToolTipText("Export the last generated song");
+		menuSave.setBackground(Color.BLACK);
+		menuSave.setForeground(new Color(255, 255, 255));
+		menuSave.setIcon(new ImageIcon(MuserGUI.class.getClassLoader().getResource("save_icon.png")));
+		var menuItemSaveMIDI = new JMenuItem("Save MIDI");
+		var menuSaveWAV = new JMenu("Save WAV");
+		var menuItemSaveWAVSC55 = new JMenuItem("SC-55");
+		var menuItemSaveWAVGeneralUser = new JMenuItem("GeneralUser GS");
+		menuSaveWAV.add(menuItemSaveWAVSC55);
+		menuSaveWAV.add(menuItemSaveWAVGeneralUser);
+		menuSave.add(menuItemSaveMIDI);
+		menuSave.add(menuSaveWAV);
+		menuBar.add(menuSave);
+		menuItemSaveMIDI.addActionListener(evt -> controller.saveMIDI());
+		menuItemSaveWAVSC55.addActionListener(evt -> controller.saveWAV("SC-55.sf2"));
+		menuItemSaveWAVGeneralUser.addActionListener(
+				evt -> controller.saveWAV("GeneralUser-GS.sf2")
+				);
 		btnStop.addActionListener(evt -> {controller.stopSong();});
 		btnGenerate.addActionListener(evt -> {
 			var settings = controller.getSettings();

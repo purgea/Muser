@@ -126,6 +126,7 @@ function New-Release {
     @(
         "Manifest-Version: 1.0"
         "Main-Class: jarsick.muser.gui.MuserGUI"
+        "Add-Exports: java.desktop/com.sun.media.sound"
         ""
     ) | Set-Content -LiteralPath $manifestFile -Encoding ASCII
 

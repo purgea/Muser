@@ -45,6 +45,7 @@
             <manifest>
                 <attribute name="Main-Class" value="jarsick.muser.gui.MuserGUI"/>
                 <attribute name="Class-Path" value="."/>
+                <attribute name="Add-Exports" value="java.desktop/com.sun.media.sound"/>
             </manifest>
             <fileset dir="${classes.dir}"/>
             <zipfileset src="${basedir}/jgoodies-forms-1.8.0.jar"

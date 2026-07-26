@@ -2,6 +2,8 @@ Version 1.0.0_alpha:
 -first version
 
 Unreleased:
+-Add SC-55 SoundFont WAV export and a Save MIDI/Save WAV menu
+-Add GeneralUser GS as a second WAV rendering SoundFont
 -Allow tempos from 50 to 250 BPM in the GUI and randomizer
 -Add a layered Dark Choir (Choir Aahs + Synth Voice) and Synth Voice chord instruments
 -Add medieval, dark-orchestral, magical, and demonic General MIDI instruments
