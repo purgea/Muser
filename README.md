@@ -20,6 +20,16 @@ If want to use a song from muser you can credit **Jarsick** as well as **Muser**
 
 Apache Ant is optional. If installed, `ant` produces the same release path.
 
+On Linux, make the Bash script executable once and run the equivalent commands:
+
+```bash
+chmod +x build.sh
+./build.sh                 # build release/muser.jar
+./build.sh run             # build and launch Muser
+./build.sh compile         # compile into build/classes
+./build.sh clean           # remove generated files
+```
+
 ## Reporting Issues
 When you report an issue, please indicate:
 - Muser version.
